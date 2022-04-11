@@ -1,5 +1,5 @@
 ---
-title: "JSC370 HW5"
+title: "JSC370 HW5 - Interactive Visualization"
 author: "Chloe Nguyen"
 output: html_document
 ---
