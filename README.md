@@ -1,6 +1,6 @@
 # JSC370 HW5 Website
 
-This was completed for JSC370 HW5. Please visit the 'Visualizations' (https://annguyen1404.github.io/JSC370-HW5/jsc370_hw5.html) tab to see the HW5 visualizations.
+This was completed for JSC370 HW5. Please visit the ['Visualizations' tab] (https://annguyen1404.github.io/JSC370-HW5/jsc370_hw5.html) to see the HW5 visualizations.
 
 The aim of this project is to better learn and explore interactive visualizations- building off of the JSC370 midterm.
 
