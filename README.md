@@ -10,7 +10,7 @@ There are many ways to score in American football. A relatively reliable method 
 
 This project works with data provided by the NFL's 2022 Big Data Bowl: https://www.kaggle.com/c/nfl-big-data-bowl-2022/overview
 
-Team locations and names were retrieve from:
+Team locations and names were retrieved from:
 
 - https://github.com/Sinbad311/CloudProject/blob/master/NFL%20Stadium%20Latitude%20and%20Longtitude.csv
 
