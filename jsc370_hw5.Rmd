@@ -136,7 +136,7 @@ data[, kickLength := fcoalesce(kickLength, mean(kickLength, na.rm = TRUE)),
 
 Note that a successful field goal kick is a kick that manages to score points- that is, a kick that goes through the goal post.
 
-First, we take a look at each team's field goal success rate by the starting yard line. From the visual below, we can see that the team with the furthest successful kick attempt in the 2018-2020 seasons is DAL (Dallas Cowboys)- with a kick starting at between the 45-50 yard line. Additionally, while most teams that attempt close field goal kicks (between the 0 to 5 yard line) have scored 100% of their attempts, the Miami Dolphins (MIA) and Philadelphia Eagles (PHI), looks to be significantly less successful. 
+First, we take a look at each team's field goal success rate by the starting yard line. From the visual below, we can see that the furthest successful kick attempts in 2018-2020 were between the 45-50 yard line and completed by the Dallas Cowboys (DAL) and the Carolina Panthers (CAR). Additionally, while most teams that attempted close field goal kicks (between the 0 to 5 yard line) have scored 100% of their attempts, the Miami Dolphins (MIA) and Philadelphia Eagles (PHI) looks to be less successful. The teams with the shortest max yard line successful kicks are the Minesota Vikings (MIN) and the New England Patriots (NE). Both teams's furthest successful kick were between the 30-35 yard line.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
