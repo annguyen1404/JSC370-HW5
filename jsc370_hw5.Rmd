@@ -211,7 +211,7 @@ data %>% plot_ly(
   layout(title="Kick Length of Successful and Unsuccessful Field Goal Attempts \n per Team for 2018-2020",
          yaxis=list(title="Kick length (yards)"),
          xaxis=list(title="Team"),
-         legend=list(title=list(text='Successful Kick')),
+         legend=list(title=list(text='Successful Kicks')),
          hovermode="compare")
 ```
 
