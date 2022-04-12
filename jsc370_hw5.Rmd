@@ -157,7 +157,8 @@ data_yardline %>%
           colorbar= list(title='Success Rate'),
           hoverinfo = 'text',
             text = ~paste("Team:", data_yardline$possessionTeam,
-                          "<br> Yard Line:", data_yardline$yardlineInt,
+                          "<br> Yard Line:", data_yardline$yardlineInt-2.5, "to",
+                          data_yardline$yardlineInt+2.5,
                           "<br> Success Rate:", round(data_yardline$prop_success, 2),
                           "<br> Attempts:", data_yardline$attempts)) %>%
   layout(title="Field Goal Attempt Success Rate by Yard Line per Team in 2018-2020", 
