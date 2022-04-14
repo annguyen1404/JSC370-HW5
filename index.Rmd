@@ -1,5 +1,5 @@
 ---
-title: "JSC370 HW5 - Interactive Visualization"
+title: "A Look at NFL Field Goals - Interactive Visualizations"
 author: "Chloe Nguyen"
 output: html_document
 ---

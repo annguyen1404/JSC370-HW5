@@ -1,7 +1,7 @@
 name: "JSC370 HW5"
 output_dir: "docs"
 navbar:
-  title: "JSC370 HW5: Interactive Visualization"
+  title: "A Look at NFL Field Goals"
   author: "Chloe Nguyen"
   left:
     - text: "About"
