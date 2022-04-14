@@ -1,0 +1,23 @@
+.html-widget {
+    margin: auto;
+}
+
+.marker-cluster-small {
+background-color: rgba(218, 169, 183, 0.8);
+}
+.marker-cluster-small div {
+background-color: rgba(192, 108, 132, 0.6);
+}
+.marker-cluster-medium {
+background-color: rgba(174, 161, 186, 0.8);
+}
+.marker-cluster-medium div {
+background-color: rgba(108, 91, 123, 0.6);
+}
+
+.marker-cluster-large {
+background-color: rgba(162, 190, 215, 0.8);
+}
+.marker-cluster-large div {
+background-color: rgba(53, 92, 125, 0.6);
+}

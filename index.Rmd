@@ -8,6 +8,8 @@ This website was created for JSC370 HW5.
 
 Please refer to the 'Visualizations' tab for HW5 visualizations.
 
+<br>
+
 ## About {.tabset}
 
 ### The Data
@@ -22,16 +24,136 @@ Team locations and names were retrieved from:
 
 - https://gist.github.com/cnizzardini/13d0a072adb35a0d5817
 
+<br>
+
 
 ### Why Football Field Goals?
 
 The creator of this project, Chloe Nguyen, is particularly interested in the kicker position (and hence is interested in investigating more on football field goals for JSC370 projects) because it is the only reasonable football position she can potentially play- as a relatively small person who cannot throw or catch a football. Chloe is a (bandwaggon) Bengals fan and is still devasted over their lost at the last Super Bowl. She is very excited that JSC370 has allowed her the opporunity to unite her interests of football and data science.
 
+<br>
+
 
 ### The Assignment
 
-The aim of this project is to better learn and explore interactive visualizations- building off of the JSC370 midterm.
+The aim of this project is to better learn and explore interactive visualizations- building off of the JSC370 midterm. 
 
+<br>
+
+
+
+
+## A Map of the NFL Teams
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(tidyverse)
+library(leaflet)
+```
+
+```{r data-prep, echo=FALSE, message=FALSE, warning=FALSE}
+# Loading in and merging datasets
+teams_abbrev <- read_csv("data/nfl_abbrev.csv")
+# Substring to get team
+teams_abbrev <- teams_abbrev %>%
+  mutate(Team = sub('^(.+)[?=" "]', "", teams_abbrev$Name))
+teams_loc <- read_csv("data/nfl_locations.csv")
+# Fix naming conventions and teams that moved
+teams_abbrev[teams_abbrev$Name=="Washington Football Team", "Team"] <- "Redskins"
+teams_abbrev[teams_abbrev$Name=="San Francisco 49ers", "Team"] <- "Forty-Niners"
+teams_loc[teams_loc$Team=="Rams", "longitude"] <- teams_loc[teams_loc$Team=="Chargers", "longitude"]
+teams_loc[teams_loc$Team=="Rams", "latitude"] <- teams_loc[teams_loc$Team=="Chargers", "latitude"]
+teams_loc[teams_loc$Team=="Rams", "zip"] <- teams_loc[teams_loc$Team=="Chargers", "zip"]
+teams_loc[teams_loc$Team=="Raiders", "longitude"] <- -115.1833 
+teams_loc[teams_loc$Team=="Raiders", "latitude"] <- 36.0909
+teams_loc[teams_loc$Team=="Raiders", "zip"] <- 89118
+teams_info <- merge(x=teams_abbrev,y=teams_loc,by="Team")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+
+# Map of NFL stadiums
+icon <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'gray',
+  library = 'ion',
+  markerColor = "gray"
+)
+  
+iconsTeams <- icons(
+  iconUrl =  
+    ifelse(teams_info$Abbreviation=="ARI",
+           "https://loodibee.com/wp-content/uploads/nfl-arizona-cardinals-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="ATL", 
+           "https://loodibee.com/wp-content/uploads/nfl-atlanta-falcons-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="BAL",
+            "https://loodibee.com/wp-content/uploads/nfl-baltimore-ravens-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="BUF", 
+           "https://loodibee.com/wp-content/uploads/nfl-buffalo-bills-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="CAR",
+           "https://loodibee.com/wp-content/uploads/nfl-carolina-panthers-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="CHI",
+           "https://loodibee.com/wp-content/uploads/nfl-chicago-bears-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="CIN",
+           "https://loodibee.com/wp-content/uploads/nfl-cincinnati-bengals-team-logo.png",
+    ifelse(teams_info$Abbreviation=="CLE",
+           "https://loodibee.com/wp-content/uploads/nfl-cleveland-browns-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="DAL",
+           "https://loodibee.com/wp-content/uploads/nfl-dallas-cowboys-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="DEN",
+           "https://loodibee.com/wp-content/uploads/nfl-denver-broncos-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="DET",
+           "https://loodibee.com/wp-content/uploads/nfl-detroit-lions-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="GB",
+           "https://loodibee.com/wp-content/uploads/nfl-green-bay-packers-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="HOU",
+           "https://loodibee.com/wp-content/uploads/nfl-houston-texans-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="IND",
+           "https://loodibee.com/wp-content/uploads/nfl-indianapolis-colts-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="JAX",
+           "https://loodibee.com/wp-content/uploads/nfl-jacksonville-jaguars-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="KC",
+           "https://loodibee.com/wp-content/uploads/nfl-kansas-city-chiefs-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="LV",
+           "https://loodibee.com/wp-content/uploads/nfl-oakland-raiders-team-logo.png",
+    ifelse(teams_info$Abbreviation=="LAC",
+           "https://loodibee.com/wp-content/uploads/nfl-los-angeles-chargers-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="LAR",
+           "https://loodibee.com/wp-content/uploads/los-angeles-rams-2020-logo-300x300.png",
+    ifelse(teams_info$Abbreviation=="MIA",
+           "https://loodibee.com/wp-content/uploads/nfl-miami-dolphins-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="MIN",
+           "https://loodibee.com/wp-content/uploads/nfl-minnesota-vikings-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="NE",
+           "https://loodibee.com/wp-content/uploads/nfl-new-england-patriots-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="NO",
+           "https://loodibee.com/wp-content/uploads/nfl-new-orleans-saints-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="NYG",
+           "https://loodibee.com/wp-content/uploads/nfl-new-york-giants-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="NYJ",
+           "https://loodibee.com/wp-content/uploads/nfl-new-york-jets-team-logo.png",
+    ifelse(teams_info$Abbreviation=="PHI",
+           "https://loodibee.com/wp-content/uploads/nfl-philadelphia-eagles-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="PIT",
+           "https://loodibee.com/wp-content/uploads/nfl-pittsburgh-steelers-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="SF",
+           "https://loodibee.com/wp-content/uploads/nfl-san-francisco-49ers-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="SEA",
+           "https://loodibee.com/wp-content/uploads/nfl-seattle-seahawks-team-logo-2.png",
+    ifelse(teams_info$Abbreviation=="TB",
+           "https://loodibee.com/wp-content/uploads/tampa-bay-buccaneers-2020-logo-830x830.png",
+    ifelse(teams_info$Abbreviation=="TEN",
+           "https://loodibee.com/wp-content/uploads/nfl-tennessee-titans-team-logo-2.png",
+           "https://loodibee.com/wp-content/uploads/washington-commanders-logo-830x830.png"))))))))))))))))))))))))))))))), iconWidth = 40, iconHeight = 40
+)
+
+teams_info %>% 
+  leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>%
+  addMarkers(lat=~latitude, lng=~longitude, label=~paste0('NFL Team: ', Name), icon = iconsTeams, clusterOptions = markerClusterOptions()) 
+
+```
 
 
 
